@@ -63,7 +63,7 @@ public class DatagramClient
          socket.receive( packet ) ;
 
          // Print the response
-         System.out.println( new String(packet.getData()) ) ;
+         System.out.println( "GOT DATA = " + new String(packet.getData()) ) ;
 
       }
       catch( Exception e )

@@ -33,8 +33,7 @@ public class DatagramServer
          System.out.println( "The server is ready..." ) ;
 
 
-         for( ;; )
-         {
+          while(true)
             // Create a packet
             DatagramPacket packet = new DatagramPacket( new byte[PACKETSIZE], PACKETSIZE ) ;
 
@@ -42,10 +41,13 @@ public class DatagramServer
             socket.receive( packet ) ;
 
             // Print the packet
-            System.out.println( packet.getAddress() + " " + packet.getPort() + ": " + new String(packet.getData()) ) ;
+            //System.out.println( packet.getAddress() + " " + packet.getPort() + ": " + new String(packet.getData()) ) ;
 
-            // Return the packet to the sender
-            socket.send( packet ) ;
+            String string = new String(packet.getData)
+            String[] parts = string.split("\ of\ ");
+            String part1 = parts[0]; // 004
+            String part2 = parts[1]; // 034556
+            System.out.println("packetNo = " part1 + ", totalNo = " + part2)
         }  
      }
      catch( Exception e )

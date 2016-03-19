@@ -42,33 +42,17 @@ public class DatagramClient
          // Convert the arguments first, to ensure that they are valid
          InetAddress host = InetAddress.getByName( args[0] ) ;
          int port         = Integer.parseInt( args[1] ) ;
-
+         int packetNo     = Integer.parseInt( args [2] )
          // Construct the socket
          socket = new DatagramSocket() ;
 
          // Construct the datagram packet
          DatagramPacket packet = null;
          // Send it
-         for (int i = 0; i < PACKETSIZE; i++) {
-            byte [] data = ("Packet " + i).getBytes() ;
+         for (int i = 1; i <= packetNo; i++) {
+            byte [] data = (i " of " + packetNo).getBytes() ;
             packet = new DatagramPacket( data, data.length, host, port ) ;
             socket.send( packet ) ;
-         }
-         
-
-         while(true) {
-            // Set a receive timeout, 2000 milliseconds
-            socket.setSoTimeout( 60000 ) ;
-            byte [] maxSize = ("Packet " + PACKETSIZE).getBytes() ;
-            // Prepare the packet for receive
-            packet.setData(maxSize) ;
-
-            // Wait for a response from the server
-
-            socket.receive(packet);
-            x++;
-            // Print the response
-            System.out.println( new String(packet.getData()) + " and x = " + x) ;
          }
 
 

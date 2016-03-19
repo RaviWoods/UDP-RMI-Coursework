@@ -57,8 +57,9 @@ public class DatagramServer
               totalPacketNo = Integer.parseInt(m.group(2));
             }
 
-            //System.out.println("packetNo = " + part1 + ", totalNo = " + part2);
+            
             packetNo++;
+            System.out.println("packetNo = " + packetNo + ", totalNo = " + totalPacketNo);
           }  
 
           System.out.println("Messages sent: " + totalPacketNo);

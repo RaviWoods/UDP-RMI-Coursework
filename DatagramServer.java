@@ -43,7 +43,7 @@ public class DatagramServer
             //System.out.println( packet.getAddress() + " " + packet.getPort() + ": " + new String(packet.getData()) ) ;
             String string = new String(packet.getData());
             System.out.println(string);
-            String[] parts = string.split("\/");
+            String[] parts = string.split("/");
             String part1 = parts[0]; // 004
             System.out.println("part 1 = " + part1);
             String part2 = parts[1]; // 034556

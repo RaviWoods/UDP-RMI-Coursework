@@ -24,7 +24,7 @@ java DatagramClient localhost 7777
  
 public class DatagramClient
 {
-   private final static int PACKETSIZE = 100 ;
+   private final static int PACKETSIZE = 20000000 ;
 
    public static void main( String args[] )
    {

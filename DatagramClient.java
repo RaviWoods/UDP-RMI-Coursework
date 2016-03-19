@@ -24,7 +24,7 @@ java DatagramClient localhost 7777
  
 public class DatagramClient
 {
-   private final static int PACKETSIZE = 200000 ;
+   private final static int PACKETSIZE = 2000 ;
 
    public static void main( String args[] )
    {
@@ -68,7 +68,7 @@ public class DatagramClient
             socket.receive(packet);
             x++;
             // Print the response
-            System.out.println( new String(packet.getData()) ) ;
+            System.out.println( new String(packet.getData()) + " and x = " + x) ;
          }
 
 

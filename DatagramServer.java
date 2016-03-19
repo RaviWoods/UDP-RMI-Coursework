@@ -49,7 +49,7 @@ public class DatagramServer
             String data = new String(packet.getData());
 
             String[] parts = data.split("/");
-            totalPacketNo = parts[1];
+            totalPacketNo = Integer.parseInt(parts[1]);
             //System.out.println("packetNo = " + part1 + ", totalNo = " + part2);
             packetNo++;
           }  

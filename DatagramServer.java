@@ -7,11 +7,12 @@ import java.net.* ;
  *  @author  P. Tellenbach, http://www.heimetli.ch
  *  @version V1.01
  */
- 
+
  
 public class DatagramServer
 {
 
+  private final static int MAXNOOFPACKETS = 1000000 ;
    public static void main( String args[] )
    {
       // Check the arguments
@@ -34,7 +35,8 @@ public class DatagramServer
         int totalPacketNo = 0;
           while(true) { 
             // Create a packet
-            DatagramPacket packet = new DatagramPacket( new byte[packetNo], packetNo ) ;
+            int buf = 2*MAXNOOFPACKETS + 1;
+            DatagramPacket packet = new DatagramPacket( new byte[buf], buf ) ;
 
             // Receive a packet (blocking)
             socket.receive( packet ) ;

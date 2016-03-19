@@ -34,7 +34,7 @@ public class DatagramServer
         int packetNo = 1;
         int totalPacketNo = 0;
         int buf = 2*MAXPACKETLENGTH + 1;
-          while(true) { 
+          while(packetNo != 200000) { 
             // Create a packet
 
             DatagramPacket packet = new DatagramPacket( new byte[buf], buf ) ;
@@ -52,6 +52,7 @@ public class DatagramServer
             //String part2 = parts[1]; // 034556
             // System.out.println("part 2 = " + part2);
             //System.out.println("packetNo = " + part1 + ", totalNo = " + part2);
+            packetNo++
         }  
      }
      catch( Exception e )

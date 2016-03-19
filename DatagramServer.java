@@ -33,7 +33,7 @@ public class DatagramServer
          System.out.println( "The server is ready..." ) ;
 
 
-          while(true)
+          while(true) { 
             // Create a packet
             DatagramPacket packet = new DatagramPacket( new byte[PACKETSIZE], PACKETSIZE ) ;
 
@@ -42,9 +42,8 @@ public class DatagramServer
 
             // Print the packet
             //System.out.println( packet.getAddress() + " " + packet.getPort() + ": " + new String(packet.getData()) ) ;
-
             String string = new String(packet.getData)
-            String[] parts = string.split("\ of\ ");
+            String[] parts = string.split(" of ");
             String part1 = parts[0]; // 004
             String part2 = parts[1]; // 034556
             System.out.println("packetNo = " part1 + ", totalNo = " + part2)

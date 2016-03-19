@@ -28,13 +28,13 @@ public class DatagramServer
         int port = Integer.parseInt( args[0] ) ;
         // Construct the socket
         DatagramSocket socket = new DatagramSocket( port ) ;
-
+        socket.setSoTimeout( 60000 ) ;
         System.out.println( "The server is ready..." ) ;
 
         int packetNo = 1;
         int totalPacketNo = 0;
         int buf = 2*MAXPACKETLENGTH + 1;
-          while(packetNo != 200000) { 
+          while(packetNo != totalPacketNo) { 
             // Create a packet
 
             DatagramPacket packet = new DatagramPacket( new byte[buf], buf ) ;
@@ -44,20 +44,24 @@ public class DatagramServer
 
             // Print the packet
             //System.out.println( packet.getAddress() + " " + packet.getPort() + ": " + new String(packet.getData()) ) ;
-            String string = new String(packet.getData());
-            System.out.println(string);
-            String[] parts = string.split("/");
-            String part1 = parts[0]; // 004
-            System.out.println("part 1 = " + part1);
-            String part2 = parts[1]; // 034556
-             System.out.println("part 2 = " + part2);
-            System.out.println("packetNo = " + part1 + ", totalNo = " + part2);
+            String data = new String(packet.getData());
+
+            String[] parts = data.split("/");
+            totalPacketNo = Integer.parstInt(parts[1]);
+            //System.out.println("packetNo = " + part1 + ", totalNo = " + part2);
             packetNo++;
-        }  
-     }
-     catch( Exception e )
-     {
-        System.out.println( e ) ;
-     }
+          }  
+          System.out.println("Messages sent: " + totalPacketNo);
+          System.out.println("Messages recieved: " + packetNo);
+          System.out.println("Messages lost: " + (totalPacketNo-packetNo));
+      }
+      catch( Exception e )
+      {
+          System.out.println( e ) ;
+          System.out.println("Messages sent: " + totalPacketNo);
+          System.out.println("Messages recieved: " + packetNo);
+          System.out.println("Messages lost: " + (totalPacketNo-packetNo));
+          
+      }
   }
 }

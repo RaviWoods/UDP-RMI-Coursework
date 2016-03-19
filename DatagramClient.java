@@ -51,6 +51,8 @@ public class DatagramClient
          // Send it
          for (int i = 1; i <= packetNo; i++) {
             byte [] data = (i + "/" + packetNo).getBytes() ;
+            System.out.println("packetNo = " + packetNo);
+            System.out.println("data = " + data);
             packet = new DatagramPacket( data, data.length, host, port ) ;
             socket.send( packet ) ;
          }

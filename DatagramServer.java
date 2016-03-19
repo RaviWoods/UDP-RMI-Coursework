@@ -51,7 +51,7 @@ public class DatagramServer
             String[] parts = data.split("/");
             String part2 = parts[1];
             System.out.println("totalPacketNo = " + part2);
-            totalPacketNo = Integer.parseInt(part1);
+            totalPacketNo = Integer.parseInt(part2);
             //System.out.println("packetNo = " + part1 + ", totalNo = " + part2);
             packetNo++;
           }  

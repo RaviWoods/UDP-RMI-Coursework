@@ -65,7 +65,7 @@ public class DatagramClient
 
             // Wait for a response from the server
 
-            socket.receive(packet)
+            socket.receive(packet);
 
             // Print the response
             System.out.println( new String(packet.getData()) ) ;

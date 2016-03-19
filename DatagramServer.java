@@ -48,13 +48,17 @@ public class DatagramServer
             //System.out.println( packet.getAddress() + " " + packet.getPort() + ": " + new String(packet.getData()) ) ;
             String data = new String(packet.getData());
 
-            String[] parts = data.split("/");
-            String part2 = parts[1];
-            System.out.println("totalPacketNo = " + part2);
-            totalPacketNo = Integer.parseInt(part2);
+            Pattern p = Pattern.compile("([0-9]+)/([0-9]+)");
+            Matcher m = p.matcher(data);
+            if (m.find())
+            { 
+              itotalPacketNo = Integer.parseInt(m.group(2));
+            }
+
             //System.out.println("packetNo = " + part1 + ", totalNo = " + part2);
             packetNo++;
           }  
+
           System.out.println("Messages sent: " + totalPacketNo);
           System.out.println("Messages recieved: " + packetNo);
           System.out.println("Messages lost: " + (totalPacketNo-packetNo));

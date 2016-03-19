@@ -33,7 +33,7 @@ public class DatagramServer
 
         int packetNo = 1;
         int totalPacketNo = 0;
-        int buf = 2*MAXNOOFPACKETS + 1;
+        int buf = 2*MAXNOOFPACKETS.length + 1;
           while(true) { 
             // Create a packet
 

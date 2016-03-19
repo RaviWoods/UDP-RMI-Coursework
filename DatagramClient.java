@@ -58,7 +58,7 @@ public class DatagramClient
 
          while(true) {
             // Set a receive timeout, 2000 milliseconds
-            socket.setSoTimeout( 600000 ) ;
+            socket.setSoTimeout( 60000 ) ;
             byte [] maxSize = ("Packet " + PACKETSIZE).getBytes() ;
             // Prepare the packet for receive
             packet.setData(maxSize) ;

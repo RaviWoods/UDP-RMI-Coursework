@@ -50,7 +50,7 @@ public class DatagramClient
          DatagramPacket packet = null;
          // Send it
          for (int i = 1; i <= packetNo; i++) {
-            byte [] data = (i " of " + packetNo).getBytes() ;
+            byte [] data = (i + " of " + packetNo).getBytes() ;
             packet = new DatagramPacket( data, data.length, host, port ) ;
             socket.send( packet ) ;
          }

@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 public class DatagramServer
 {
 
-  private final static int MAXPACKETLENGTH = 6 ;
+  private final static int MAXPACKETLENGTH = 7 ;
    public static void main( String args[] )
    {
       

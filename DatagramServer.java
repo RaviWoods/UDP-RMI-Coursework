@@ -43,12 +43,12 @@ public class DatagramServer
             //System.out.println( packet.getAddress() + " " + packet.getPort() + ": " + new String(packet.getData()) ) ;
             String string = new String(packet.getData());
             System.out.println(string);
-            String[] parts = string.split("/");
-            String part1 = parts[0]; // 004
-            System.out.println("part 1 = " + part1);
-            String part2 = parts[1]; // 034556
-             System.out.println("part 2 = " + part2);
-            System.out.println("packetNo = " + part1 + ", totalNo = " + part2);
+            //String[] parts = string.split("/");
+            //String part1 = parts[0]; // 004
+            //System.out.println("part 1 = " + part1);
+            //String part2 = parts[1]; // 034556
+            // System.out.println("part 2 = " + part2);
+            //System.out.println("packetNo = " + part1 + ", totalNo = " + part2);
             packetNo++;
         }  
      }

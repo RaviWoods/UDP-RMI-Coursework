@@ -47,29 +47,30 @@ public class DatagramClient
          socket = new DatagramSocket() ;
 
          // Construct the datagram packet
-         byte [] data = "Hello Server".getBytes() ;
-         DatagramPacket packet = new DatagramPacket( data, data.length, host, port ) ;
-
+         
          // Send it
-         for (int i = 0; i <PACKETSIZE; i++) {
-         socket.send( packet ) ;
+         for (int i = 0; i < PACKETSIZE; i++) {
+            byte [] data = ("Packet " + i).getBytes() ;
+            DatagramPacket packet = new DatagramPacket( data, data.length, host, port ) ;
+            socket.send( packet ) ;
          }
 
 
-         // Set a receive timeout, 2000 milliseconds
-         socket.setSoTimeout( 2000 ) ;
+         while(1) {
+            // Set a receive timeout, 2000 milliseconds
+            socket.setSoTimeout( 2000 ) ;
+            byte [] maxSize = ("Packet " + PACKETSIZE).getBytes() ;
+            // Prepare the packet for receive
+            packet.setData( new byte[maxSize] ) ;
 
-         // Prepare the packet for receive
-         packet.setData( new byte[PACKETSIZE] ) ;
+            // Wait for a response from the server
 
-         // Wait for a response from the server
-         int x = 0;
-         if (socket.receive( packet ) ) {
-            x++;
-         };
+            socket.receive(packet)
 
-         // Print the response
-         System.out.println( "GOT DATA of " + x + " messages" ) ;
+            // Print the response
+            System.out.println( new String(packet.getData()) ) ;
+         }
+
 
       }
       catch( Exception e )

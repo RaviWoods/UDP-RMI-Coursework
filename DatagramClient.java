@@ -29,9 +29,9 @@ public class DatagramClient
    public static void main( String args[] )
    {
       // Check the arguments
-      if( args.length != 2 )
+      if( args.length != 3 )
       {
-         System.out.println( "usage: java DatagramClient host port" ) ;
+         System.out.println( "usage: java DatagramClient host port packetNo" ) ;
          return ;
       }
 

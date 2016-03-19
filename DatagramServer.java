@@ -54,7 +54,6 @@ public class DatagramServer
             System.out.println("packetNo = " + part1 + ", totalNo = " + part2);
             packetNo++;
         }  
-        System.out.println("packetNo = " packetNo);
      }
      catch( Exception e )
      {

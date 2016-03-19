@@ -36,7 +36,7 @@ public class DatagramClient
       }
 
       DatagramSocket socket = null ;
-
+      int x = 0;
       try
       {
          // Convert the arguments first, to ensure that they are valid
@@ -54,11 +54,11 @@ public class DatagramClient
             packet = new DatagramPacket( data, data.length, host, port ) ;
             socket.send( packet ) ;
          }
-
+         
 
          while(true) {
             // Set a receive timeout, 2000 milliseconds
-            socket.setSoTimeout( 120000 ) ;
+            socket.setSoTimeout( 600000 ) ;
             byte [] maxSize = ("Packet " + PACKETSIZE).getBytes() ;
             // Prepare the packet for receive
             packet.setData(maxSize) ;
@@ -66,7 +66,7 @@ public class DatagramClient
             // Wait for a response from the server
 
             socket.receive(packet);
-
+            x++;
             // Print the response
             System.out.println( new String(packet.getData()) ) ;
          }
@@ -75,6 +75,7 @@ public class DatagramClient
       }
       catch( Exception e )
       {
+         System.out.println("x = " + x) ;
          System.out.println( e ) ;
       }
       finally

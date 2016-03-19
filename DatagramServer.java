@@ -12,7 +12,7 @@ import java.net.* ;
 public class DatagramServer
 {
 
-  private final static int MAXNOOFPACKETS = 1000000 ;
+  private final static int MAXPACKETLENGTH = 6 ;
    public static void main( String args[] )
    {
       // Check the arguments
@@ -33,7 +33,7 @@ public class DatagramServer
 
         int packetNo = 1;
         int totalPacketNo = 0;
-        int buf = 2*MAXNOOFPACKETS.length + 1;
+        int buf = 2*MAXPACKETLENGTH + 1;
           while(true) { 
             // Create a packet
 

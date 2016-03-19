@@ -52,8 +52,9 @@ public class DatagramServer
             //String part2 = parts[1]; // 034556
             // System.out.println("part 2 = " + part2);
             //System.out.println("packetNo = " + part1 + ", totalNo = " + part2);
-            packetNo++
+            packetNo++;
         }  
+        System.out.println("packetNo = " packetNo);
      }
      catch( Exception e )
      {

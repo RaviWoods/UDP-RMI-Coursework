@@ -42,7 +42,7 @@ public class DatagramClient
          // Convert the arguments first, to ensure that they are valid
          InetAddress host = InetAddress.getByName( args[0] ) ;
          int port         = Integer.parseInt( args[1] ) ;
-         int packetNo     = Integer.parseInt( args [2] )
+         int packetNo     = Integer.parseInt( args [2] );
          // Construct the socket
          socket = new DatagramSocket() ;
 

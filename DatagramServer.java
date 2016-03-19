@@ -1,5 +1,7 @@
 import java.net.* ;
 import java.lang.* ;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 /**
  *  A simple datagram server
  *  Shows how to send and receive UDP packets in Java
@@ -52,7 +54,7 @@ public class DatagramServer
             Matcher m = p.matcher(data);
             if (m.find())
             { 
-              iotalPacketNo = Integer.parseInt(m.group(2));
+              totalPacketNo = Integer.parseInt(m.group(2));
             }
 
             //System.out.println("packetNo = " + part1 + ", totalNo = " + part2);

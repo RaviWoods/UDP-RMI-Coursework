@@ -47,16 +47,16 @@ public class DatagramClient
          socket = new DatagramSocket() ;
 
          // Construct the datagram packet
-         
+         DatagramPacket packet = null;
          // Send it
          for (int i = 0; i < PACKETSIZE; i++) {
             byte [] data = ("Packet " + i).getBytes() ;
-            DatagramPacket packet = new DatagramPacket( data, data.length, host, port ) ;
+            packet = new DatagramPacket( data, data.length, host, port ) ;
             socket.send( packet ) ;
          }
 
 
-         while(TRUE) {
+         while(true) {
             // Set a receive timeout, 2000 milliseconds
             socket.setSoTimeout( 2000 ) ;
             byte [] maxSize = ("Packet " + PACKETSIZE).getBytes() ;

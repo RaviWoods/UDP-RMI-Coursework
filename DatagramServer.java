@@ -46,7 +46,7 @@ public class DatagramServer
             String[] parts = string.split(" of ");
             String part1 = parts[0]; // 004
             String part2 = parts[1]; // 034556
-            System.out.println("packetNo = " part1 + ", totalNo = " + part2)
+            System.out.println("packetNo = " + part1 + ", totalNo = " + part2);
         }  
      }
      catch( Exception e )

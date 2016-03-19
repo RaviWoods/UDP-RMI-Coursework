@@ -24,7 +24,7 @@ java DatagramClient localhost 7777
  
 public class DatagramClient
 {
-   private final static int PACKETSIZE = 20000000 ;
+   private final static int PACKETSIZE = 100000 ;
 
    public static void main( String args[] )
    {
@@ -58,7 +58,7 @@ public class DatagramClient
 
          while(true) {
             // Set a receive timeout, 2000 milliseconds
-            socket.setSoTimeout( 2000 ) ;
+            socket.setSoTimeout( 120000 ) ;
             byte [] maxSize = ("Packet " + PACKETSIZE).getBytes() ;
             // Prepare the packet for receive
             packet.setData(maxSize) ;

@@ -65,7 +65,7 @@ public class DatagramClient
          // Wait for a response from the server
          int x = 0;
          if (socket.receive( packet ) ) {
-            x++
+            x++;
          };
 
          // Print the response

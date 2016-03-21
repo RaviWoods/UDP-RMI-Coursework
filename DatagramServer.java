@@ -17,7 +17,8 @@ public class DatagramServer
   private final static int MAXPACKETLENGTH = 7 ;
    public static void main( String args[] )
    {
-      
+      int packetNo = 1;
+      int totalPacketNo = 0;
       // Check the arguments
       if( args.length != 1 )
       {
@@ -27,8 +28,7 @@ public class DatagramServer
 
       try
       {
-        int packetNo = 1;
-        int totalPacketNo = 0;
+
          // Convert the argument to ensure that is it valid
         int port = Integer.parseInt( args[0] ) ;
         // Construct the socket

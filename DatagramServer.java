@@ -69,9 +69,9 @@ public class DatagramServer
       catch( Exception e )
       {
           System.out.println( e ) ;
-          //System.out.println("Messages sent: " + totalPacketNo);
-          //System.out.println("Messages recieved: " + packetNo);
-          //System.out.println("Messages lost: " + (totalPacketNo-packetNo));
+          System.out.println("Messages sent: " + totalPacketNo);
+          System.out.println("Messages recieved: " + packetNo);
+          System.out.println("Messages lost: " + (totalPacketNo-packetNo));
           
       }
   }

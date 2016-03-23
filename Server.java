@@ -102,10 +102,15 @@ public class Server implements Hello {
             try {
             	registry.unbind("Hello");
 			} catch (Exception e) {
-				System.err.println("unbind failed - probably not a problem:" + e.toString());
+				System.err.println("unbind failed - probably not a problem:" + e.toString() + "/unbind_failed");
 			}
 
-            registry.bind("Hello", stub);
+            try {
+                registry.bind("Hello", stub);
+            } catch (Exception e) {
+                System.err.println("BIND FAILED" + e.toString());
+            }
+            
             System.err.println("Server ready");
             
         } catch (Exception e) {

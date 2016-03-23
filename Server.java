@@ -38,7 +38,7 @@ public class Server implements Hello {
         
         try {
             Server obj = new Server();
-            Hello stub = (Hello) UnicastRemoteObject.exportObject(obj, 0);
+            Hello stub = (Hello)UnicastRemoteObject.exportObject(obj, 0);
 
             // Bind the remote object's stub in the registry
             Registry registry = LocateRegistry.getRegistry();
@@ -47,7 +47,7 @@ public class Server implements Hello {
             System.err.println("Server ready");
         } catch (Exception e) {
             System.err.println("Server exception: " + e.toString());
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 }

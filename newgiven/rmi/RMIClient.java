@@ -18,7 +18,7 @@ public class RMIClient {
 
 	public static void main(String[] args) {
 
-		RMIServerI iRMIServer = null;
+		
 
 		// Check arguments for Server host and number of messages
 		if (args.length < 2){
@@ -29,8 +29,8 @@ public class RMIClient {
 		String urlServer = new String("rmi://" + args[0] + "/RMIServer");
 		int numMessages = Integer.parseInt(args[1]);
 
-		// TO-DO: Initialise Security Manager
-
+		//Initialise Security Manager
+		RMIServerI stub = (RMIServerI)Naming.lookup(urlServer);
 		// TO-DO: Bind to RMIServer
 
 		// TO-DO: Attempt to send messages the specified number of times

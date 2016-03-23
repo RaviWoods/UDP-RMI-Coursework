@@ -22,7 +22,7 @@ java DatagramClient localhost 7777
 
  
  
-public class DatagramClient
+public class DatagramClient {
 
    public static void main( String args[] )
    {

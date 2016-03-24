@@ -41,7 +41,7 @@ public class UDPClient {
    }
 
    private void testLoop(InetAddress serverAddr, int recvPort, int countTo) {
-      for (int i = 1; i <= countTo; i++) {
+      for (int i = 0; i < countTo; i++) {
          MessageInfo msg = new MessageInfo(countTo,i);
          this.send(msg.toString(),serverAddr,recvPort);
       }

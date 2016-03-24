@@ -6,10 +6,10 @@ echo \(c\) Daniele Sgandurra, Imperial College London, Mar 2016
 rm -f rmiclient.bat rmiserver.bat udpclient.bat udpserver.bat build.bat 
 cp scripts/Makefile .
 cp scripts/*.sh .
-# policy
-#for i in *.sh; do
+#dos2unix policy
+for i in *.sh; do
 #    dos2unix $i
-#done
+done
 chmod u+x *.sh
 
 echo Done!

@@ -42,9 +42,7 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 		RMIServer rmis = null;
 
 		// TO-DO: Initialise Security Manager
-		RMIServerI rmiDemo = new RMIServerI();
-		Naming.rebind("RMIDemo", rmiDemo);
-		System.err.println("Server ready...");
+
 		// TO-DO: Instantiate the server class
 
 		// TO-DO: Bind to RMI registry

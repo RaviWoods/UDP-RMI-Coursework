@@ -31,9 +31,9 @@ public class UDPServer {
   }
 
   public void processMessage(String data) {
-
+    MessageInfo msg;
     try {
-      MessageInfo msg = new MessageInfo(data); 
+      msg = new MessageInfo(data); 
     } catch (Exception e) {
       System.out.println("Couldn't convert data to MessageInfo - Server");
       return;

@@ -65,7 +65,7 @@ public class RMIClient {
 			System.out.println(e);
 			}
 			try {
-				for (int i=0; i<=numMessages; i++) {
+				for (int i=0; i<numMessages; i++) {
 				MessageInfo msg = new MessageInfo(numMessages, i);
 				iRMIServer.receiveMessage(msg);
 				}

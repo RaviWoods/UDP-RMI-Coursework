@@ -41,15 +41,17 @@ public class RMIClient {
 			System.setSecurityManager(new RMISecurityManager());
 		// TO-DO: Bind to RMIServer
 		try {
+			String serverURL = null;
+			Registry registry = null;
 			try {
-				String serverURL = new String("rmi://" + args[0] + "/RMIServer");
+				serverURL = new String("rmi://" + args[0] + "/RMIServer");
 			}
 			catch (Exception e) {
 			System.out.println("1");
 			System.out.println(e);
 			}
 			try {
-				  Registry registry = LocateRegistry.getRegistry(args[0],1099);
+				  registry = LocateRegistry.getRegistry(args[0],1099);
 			}
 			catch (Exception e) {
 			System.out.println("2");

@@ -17,18 +17,21 @@ public class UDPServer {
   private void run() {
     byte[]      pacData = new byte[MAXPACKETLENGTH];
     DatagramPacket  pac = null;
-    
-    try {
-      pac = new DatagramPacket(pacData, MAXPACKETLENGTH);
-      recvSoc.setSoTimeout(30000) ;
-      recvSoc.receive(pac);
-      String data = new String(pac.getData()).trim();
-      System.out.println("data = " + data);
-      processMessage(data);
-    } catch (IOException e) {
-      System.out.println("Exceeded Timeout - Server");
-      return;
+    boolean open = true;
+
+    while(open) {
+      try {
+        pac = new DatagramPacket(pacData, MAXPACKETLENGTH);
+        recvSoc.setSoTimeout(30000) ;
+        recvSoc.receive(pac);
+        String data = new String(pac.getData()).trim();
+        System.out.println("data = " + data);
+        processMessage(data);
+      } catch (IOException e) {
+        open = false;
+      }
     }
+
   }
 
   public void processMessage(String data) {

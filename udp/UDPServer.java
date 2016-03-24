@@ -28,9 +28,11 @@ public class UDPServer {
 
       recvSoc.setSoTimeout(30000) ;
       recvSoc.receive(pac);
+      String data = new String(pac.getData());
       processMessage(pac.getData());
     } catch (IOException e) {
-      processMessage(pac.getData());
+      System.out.println("Exceeded Timeout");
+      return;
     }
   }
 
@@ -40,7 +42,7 @@ public class UDPServer {
     
     if (totalRecieved == -1 ){
       totalSent = msg.totalMessages;
-      receivedMessages = new bool[totalSent];
+      receivedMessages = new boolean[totalSent];
       totalRecieved = 0;
     }
     

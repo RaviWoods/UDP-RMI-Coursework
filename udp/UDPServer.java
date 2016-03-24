@@ -73,7 +73,20 @@ public class UDPServer {
     if (totalLost != 0) {
       System.out.println("Lost Messages are: ");
       for(int i = 0; i < totalLost; i++) {
-        System.out.print(lostMessages[i] + ", ");
+        if (i%10 == 0) {
+          if (i==(totalLost-1)) {
+            System.out.println(lostMessages[i] + ".");  
+          } else {
+            System.out.println(lostMessages[i] + ", ");  
+          }
+        } else {
+          if (i==(totalLost-1)) {
+            System.out.print(lostMessages[i] + ".");  
+          } else {
+            System.out.print(lostMessages[i] + ", ");  
+          }
+        }
+
       }     
     }
 

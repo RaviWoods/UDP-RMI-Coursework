@@ -56,8 +56,8 @@ public class UDPServer {
 
   public void finish() {
     int totalLost = 0;
-    System.out.println("totalSent = " + totalSent);
-    System.out.println("totalRecieved = " + totalRecieved);
+    //System.out.println("totalSent = " + totalSent);
+    //System.out.println("totalRecieved = " + totalRecieved);
     int [] lostMessages = new int[totalSent];
     for(int i = 0; i < totalSent; i++) {
       if(!receivedMessages[i]) {

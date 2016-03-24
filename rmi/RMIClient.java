@@ -58,7 +58,7 @@ public class RMIClient {
 			System.out.println(e);
 			}
 			try {
-				iRMIServer = (RMIServerI) Naming.lookup(serverURL);
+				iRMIServer = (RMIServerI) registry.lookup(serverURL);
 			}
 			catch (Exception e) {
 			System.out.println("3");

@@ -43,37 +43,31 @@ public class RMIClient {
 		try {
 			String serverURL = null;
 			Registry registry = null;
-			try {
-				serverURL = new String("rmi://" + args[0] + "/RMIServer");
-			}
-			catch (Exception e) {
-			System.out.println("1");
-			System.out.println(e);
-			}
-			try {
-				  registry = LocateRegistry.getRegistry(args[0],1099);
-			}
-			catch (Exception e) {
-			System.out.println("2");
-			System.out.println(e);
-			}
-			try {
-				iRMIServer = (RMIServerI) registry.lookup(serverURL);
-			}
-			catch (Exception e) {
-			System.out.println("3");
-			System.out.println(e);
-			}
-			try {
-				for (int i=0; i<numMessages; i++) {
-				MessageInfo msg = new MessageInfo(numMessages, i);
-				iRMIServer.receiveMessage(msg);
+			serverURL = new String("rmi://" + args[0] + "/RMIServer");
+			registry = LocateRegistry.getRegistry(args[0],2000);
+			iRMIServer = (RMIServerI) Naming.lookup(serverURL);
+			for (int i=0; i<numMessages; i++) {
+					try {
+						MessageInfo msg = new MessageInfo(numMessages, i);
+					}
+					catch (Exception e) {
+						System.out.println("1st");
+						System.out.println("i = " + i);
+						System.out.println(e);
+					}
+
+					try {
+						iRMIServer.receiveMessage(msg);
+					}
+					catch (Exception e) {
+						System.out.println("2nd");
+						System.out.println("i = " + i);
+						System.out.println(e);
+					}
+					
 				}
-			}
-			catch (Exception e) {
-			System.out.println("4");
-			System.out.println(e);
-			}
+		}
+
 			
           
 			

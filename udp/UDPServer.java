@@ -55,7 +55,7 @@ public class UDPServer {
     int totalLost = 0;
     int [] lostMessages = new int[totalSent];
     for(int i = 0; i < totalSent; i++) {
-      if(!recievedMessages[i]) {
+      if(recievedMessages[i] == false) {
         lostMessages[totalLost] = i;
         totalLost++;
       }

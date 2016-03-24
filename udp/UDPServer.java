@@ -11,7 +11,7 @@ public class UDPServer {
   private final static int MAXPACKETLENGTH = 50;
   private DatagramSocket recvSoc;
   private int totalSent = -1;
-  private int[] receivedMessages;
+  private boolean[] receivedMessages;
   private int totalRecieved = -1;
 
   private void run() {
@@ -29,7 +29,7 @@ public class UDPServer {
       recvSoc.setSoTimeout(30000) ;
       recvSoc.receive(pac);
       String data = new String(pac.getData());
-      processMessage(pac.getData());
+      processMessage(data);
     } catch (IOException e) {
       System.out.println("Exceeded Timeout");
       return;

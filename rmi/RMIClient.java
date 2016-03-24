@@ -47,8 +47,9 @@ public class RMIClient {
 			registry = LocateRegistry.getRegistry(args[0],2000);
 			iRMIServer = (RMIServerI) Naming.lookup(serverURL);
 			for (int i=0; i<numMessages; i++) {
+					MessageInfo msg = null;
 					try {
-						MessageInfo msg = new MessageInfo(numMessages, i);
+						msg = new MessageInfo(numMessages, i);
 					}
 					catch (Exception e) {
 						System.out.println("1st");

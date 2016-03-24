@@ -45,7 +45,7 @@ public class UDPClient {
          MessageInfo msg = new MessageInfo(countTo,i);
          this.send(msg.toString(),serverAddr,recvPort);
       }
-      System.out.println(countTo + "Messages sent");
+      System.out.println(countTo + " Messages sent");
    }
 
    private void send(String payload, InetAddress destAddr, int destPort) {

@@ -3,6 +3,7 @@ package udp;
 import java.io.IOException;
 import java.net.*;
 import java.util.Arrays;
+import java.lang.Boolean;
 import common.MessageInfo;
  
 public class UDPServer {
@@ -26,11 +27,10 @@ public class UDPServer {
       }
 
       recvSoc.setSoTimeout(30000) ;
-
-      socket.receive(pac);
-      processMessage(pac.getData);
+      recvSoc.receive(pac);
+      processMessage(pac.getData());
     } catch (IOException e) {
-      processMessage(pac.getData);
+      processMessage(pac.getData());
     }
   }
 
@@ -51,6 +51,7 @@ public class UDPServer {
 
   public void finish() {
     int totalLost = 0;
+    int [] lostMessages = new int[totalSent];
     for(int i = 0; i < totalSent; i++) {
       if(!recievedMessages[i]) {
         lostMessages[totalLost] = i;

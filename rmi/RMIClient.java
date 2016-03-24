@@ -48,15 +48,10 @@ public class RMIClient {
 			iRMIServer = (RMIServerI) Naming.lookup(serverURL);
 			for (int i=0; i<numMessages; i++) {
 					MessageInfo msg = null;
-					try {
-						msg = new MessageInfo(numMessages, i);
+					msg = new MessageInfo(numMessages, i);
+					if(iRMIServer == null) {
+						System.out.println("NULL");
 					}
-					catch (Exception e) {
-						System.out.println("1st");
-						System.out.println("i = " + i);
-						System.out.println(e);
-					}
-
 					try {
 						iRMIServer.receiveMessage(msg);
 					}

@@ -41,15 +41,43 @@ public class RMIClient {
 			System.setSecurityManager(new RMISecurityManager());
 		// TO-DO: Bind to RMIServer
 		try {
-			String serverURL = new String("rmi://" + args[0] + "/RMIServer");
-            Registry registry = LocateRegistry.getRegistry(args[0],1099);
-			iRMIServer = (RMIServerI) Naming.lookup(serverURL);
-
-		// TO-DO: Attempt to send messages the specified number of times
-			for (int i=0; i<=numMessages; i++) {
+			try {
+				String serverURL = new String("rmi://" + args[0] + "/RMIServer");
+			}
+			catch (Exception e) {
+			System.out.println("1");
+			System.out.println(e);
+			}
+			try {
+				  Registry registry = LocateRegistry.getRegistry(args[0],1099);
+			}
+			catch (Exception e) {
+			System.out.println("2");
+			System.out.println(e);
+			}
+			try {
+				iRMIServer = (RMIServerI) Naming.lookup(serverURL);
+			}
+			catch (Exception e) {
+			System.out.println("3");
+			System.out.println(e);
+			}
+			try {
+				for (int i=0; i<=numMessages; i++) {
 				MessageInfo msg = new MessageInfo(numMessages, i);
 				iRMIServer.receiveMessage(msg);
+				}
 			}
+			catch (Exception e) {
+			System.out.println("4");
+			System.out.println(e);
+			}
+			
+          
+			
+
+		// TO-DO: Attempt to send messages the specified number of times
+			
 		}
 		catch (Exception e) {
 			System.out.println(e);

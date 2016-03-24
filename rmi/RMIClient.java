@@ -67,14 +67,6 @@ public class RMIClient {
 					
 				}
 		}
-
-			
-          
-			
-
-		// TO-DO: Attempt to send messages the specified number of times
-			
-		}
 		catch (Exception e) {
 			System.out.println(e);
 		}

@@ -23,6 +23,7 @@ public class UDPServer {
       recvSoc.setSoTimeout(30000) ;
       recvSoc.receive(pac);
       String data = new String(pac.getData()).trim();
+      System.out.println("data = " + data);
       processMessage(data);
     } catch (IOException e) {
       System.out.println("Exceeded Timeout - Server");

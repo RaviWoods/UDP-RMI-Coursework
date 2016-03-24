@@ -29,7 +29,7 @@ public class UDPServer {
       } catch (IOException e) {
         open = false;
       }
-    } while (open && totalSent != totalRecieved)
+    } while (open && totalSent != totalRecieved);
 
   }
 

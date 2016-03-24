@@ -52,13 +52,7 @@ public class UDPClient {
 
       byte[] pktData = payload.getBytes();
       int payloadSize = pktData.length;
-      DatagramPacket pkt = null;
-      try {
-         pkt = new DatagramPacket(pktData, payloadSize, destAddr, destPort);
-      } catch (SocketException e) {
-         System.out.println("Couldn't setup packet - Client");
-         e.printStackTrace();
-      }
+      DatagramPacket pkt = new DatagramPacket(pktData, payloadSize, destAddr, destPort);
 
       try {
           sendSoc.send(pkt) ;

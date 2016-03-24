@@ -3,7 +3,7 @@ import java.lang.* ;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
  
-public class DatagramServer
+public class UDPServer
 {
 
   private final static int MAXPACKETLENGTH = 7 ;

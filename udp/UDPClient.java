@@ -1,7 +1,7 @@
 import java.net.* ;
 
  
-public class DatagramClient {
+public class UDPClient {
 
    public static void main( String args[] )
    {

@@ -7,9 +7,9 @@ rm -f rmiclient.bat rmiserver.bat udpclient.bat udpserver.bat build.bat
 cp scripts/Makefile .
 cp scripts/*.sh .
 #dos2unix policy
-for i in *.sh; do
+#for i in *.sh; do
 #    dos2unix $i
-done
+#done
 chmod u+x *.sh
 
 echo Done!

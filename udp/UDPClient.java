@@ -15,14 +15,14 @@ public class UDPClient {
 
       // Get the parameters
       if (args.length < 3) {
-         System.err.println("Arguments required: server name/IP, recv port, message count");
+         System.err.println("Arguments required: server name/IP, recv port, message count  - Client");
          System.exit(-1);
       }
 
       try {
          serverAddr = InetAddress.getByName(args[0]);
       } catch (UnknownHostException e) {
-         System.out.println("Bad server address in UDPClient, " + args[0] + " caused an unknown host exception " + e);
+         System.out.println("Bad server address in UDPClient, " + args[0] + " caused an unknown host exception " + e + " - Client");
          System.exit(-1);
       }
       recvPort = Integer.parseInt(args[1]);

@@ -19,26 +19,26 @@ public class UDPServer {
     DatagramPacket  pac = null;
     
     try {
-      try {
-        pac = new DatagramPacket(pacData, MAXPACKETLENGTH);
-      } catch (SocketException e) {
-         System.out.println("Couldn't setup packet - Server");
-         e.printStackTrace();
-      }
-
+      pac = new DatagramPacket(pacData, MAXPACKETLENGTH);
       recvSoc.setSoTimeout(30000) ;
       recvSoc.receive(pac);
       String data = new String(pac.getData());
       processMessage(data);
     } catch (IOException e) {
-      System.out.println("Exceeded Timeout");
+      System.out.println("Exceeded Timeout - Server");
       return;
     }
   }
 
   public void processMessage(String data) {
 
-    MessageInfo msg = new MessageInfo(data);
+    try {
+      MessageInfo msg = new MessageInfo(data); 
+    } catch (Exception e) {
+      System.out.println("Couldn't convert data to MessageInfo - Server");
+      return;
+    }
+    
     
     if (totalRecieved == -1 ){
       totalSent = msg.totalMessages;
@@ -84,7 +84,7 @@ public class UDPServer {
   public static void main(String args[]) {
     int recvPort;
     if (args.length < 1) {
-      System.err.println("Arguments required: recv port");
+      System.err.println("Arguments required: recv port - Server");
       System.exit(-1);
     }
     recvPort = Integer.parseInt(args[0]);

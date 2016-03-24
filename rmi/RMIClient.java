@@ -44,7 +44,7 @@ public class RMIClient {
 			String serverURL = null;
 			Registry registry = null;
 			serverURL = new String("rmi://" + args[0] + "/RMIServer");
-			registry = LocateRegistry.getRegistry(args[0],2000);
+			registry = LocateRegistry.getRegistry(args[0],1099);
 			iRMIServer = (RMIServerI) Naming.lookup(serverURL);
 			for (int i=0; i<numMessages; i++) {
 					MessageInfo msg = null;

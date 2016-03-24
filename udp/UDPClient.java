@@ -1,7 +1,7 @@
 package udp;
 
 import java.io.IOException;
-import java.net.*
+import java.net.*;
 import common.MessageInfo;
 
 public class UDPClient {

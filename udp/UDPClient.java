@@ -1,53 +1,70 @@
 package udp;
 
+import java.io.IOException;
+import java.net.*
+import common.MessageInfo;
 
-import java.net.* ;
-
- 
 public class UDPClient {
 
-   public static void main( String args[] )
-   {
-      // Check the arguments
-      if( args.length != 3 )
-      {
-         System.out.println( "usage: java DatagramClient host port packetNo" ) ;
-         return ;
+   private DatagramSocket sendSoc;
+
+   public static void main(String[] args) {
+      InetAddress serverAddr = null;
+      int         recvPort;
+      int         countTo;
+
+      // Get the parameters
+      if (args.length < 3) {
+         System.err.println("Arguments required: server name/IP, recv port, message count");
+         System.exit(-1);
       }
 
-      DatagramSocket socket = null ;
-      int x = 0;
-      try
-      {
-         // Convert the arguments first, to ensure that they are valid
-         InetAddress host = InetAddress.getByName( args[0] ) ;
-         int port         = Integer.parseInt( args[1] ) ;
-         int packetNo     = Integer.parseInt( args [2] );
-         // Construct the socket
-         socket = new DatagramSocket() ;
-
-         // Construct the datagram packet
-         DatagramPacket packet = null;
-         // Send it
-         for (int i = 1; i <= packetNo; i++) {
-            byte [] data = (i + "/" + packetNo).getBytes() ;
-            System.out.println("packetNo = " + packetNo);
-            System.out.println(i + "/" + packetNo);
-            packet = new DatagramPacket( data, data.length, host, port ) ;
-            socket.send( packet ) ;
-         }
-
-
+      try {
+         serverAddr = InetAddress.getByName(args[0]);
+      } catch (UnknownHostException e) {
+         System.out.println("Bad server address in UDPClient, " + args[0] + " caused an unknown host exception " + e);
+         System.exit(-1);
       }
-      catch( Exception e )
-      {
-         System.out.println("x = " + x) ;
-         System.out.println( e ) ;
+      recvPort = Integer.parseInt(args[1]);
+      countTo = Integer.parseInt(args[2]);
+      UDPClient client = new UDPClient();
+      client.testLoop(serverAddr, recvPort, countTo);
+   }
+
+   public UDPClient() {
+      try {
+         sendSoc = new DatagramSocket();
+      } catch (SocketException e) {
+         System.out.println("Couldn't initialise socket - Client");
+         e.printStackTrace();
       }
-      finally
-      {
-         if( socket != null )
-            socket.close() ;
+   }
+
+   private void testLoop(InetAddress serverAddr, int recvPort, int countTo) {
+      for (int i = 1; i <= countTo; i++) {
+         MessageInfo msg = new MessageInfo(countTo,i);
+         this.send(msg.toString(),serverAddr,recvPort);
+      }
+      System.out.println(countTo + "Messages sent");
+   }
+
+   private void send(String payload, InetAddress destAddr, int destPort) {
+
+      byte[] pktData = payload.getBytes();
+      int payloadSize = pktData.length;
+      
+      try {
+         DatagramPacket pkt = new DatagramPacket(payload, payloadSize, destAddr, destPort);
+      } catch (SocketException e) {
+         System.out.println("Couldn't setup packet - Client");
+         e.printStackTrace();
+      }
+
+      try {
+          sendSoc.send(pkt) ;
+      } catch (IOException e) {
+         System.out.println("Couldn't send packet - Client");
+         e.printStackTrace();
       }
    }
 }

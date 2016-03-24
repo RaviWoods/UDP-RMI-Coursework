@@ -1,17 +1,17 @@
 package udp;
 
 import java.io.IOException;
-import java.net.* ;
+import java.net.*;
 import java.util.Arrays;
 import common.MessageInfo;
  
 public class UDPServer {
 
-  private final static int MAXPACKETLENGTH = 50 ;
+  private final static int MAXPACKETLENGTH = 50;
   private DatagramSocket recvSoc;
   private int totalSent = -1;
   private int[] receivedMessages;
-  int totalRecieved = -1;
+  private int totalRecieved = -1;
 
   private void run() {
     byte[]      pacData = new byte[MAXPACKETLENGTH];
@@ -19,7 +19,7 @@ public class UDPServer {
     
     try {
       try {
-        pac = new DatagramPacket(pacData, MAXPACKETLENGTH)
+        pac = new DatagramPacket(pacData, MAXPACKETLENGTH);
       } catch (SocketException e) {
          System.out.println("Couldn't setup packet - Server");
          e.printStackTrace();

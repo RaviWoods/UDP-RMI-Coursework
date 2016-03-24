@@ -66,10 +66,13 @@ public class UDPServer {
     System.out.println("Messages sent: " + totalSent);
     System.out.println("Messages recieved: " + totalRecieved);
     System.out.println("Messages lost: " + (totalSent-totalRecieved));
-    System.out.println("Lost Messages are: ");
-    for(int i = 0; i < totalLost; i++) {
-      System.out.print(lostMessages[i] + ", ");
+    if (totalLost != 0) {
+      System.out.println("Lost Messages are: ");
+      for(int i = 0; i < totalLost; i++) {
+        System.out.print(lostMessages[i] + ", ");
+      }     
     }
+
     
   }
 

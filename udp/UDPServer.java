@@ -19,7 +19,7 @@ public class UDPServer {
     DatagramPacket  pac = null;
     boolean open = true;
 
-    while(open || (totalSent==totalRecieved && totalSent > -1 && totalRecieved > -1)) {
+    do {
       try {
         pac = new DatagramPacket(pacData, MAXPACKETLENGTH);
         recvSoc.setSoTimeout(30000) ;
@@ -29,7 +29,7 @@ public class UDPServer {
       } catch (IOException e) {
         open = false;
       }
-    }
+    } while (open && totalSent != totalRecieved)
 
   }
 

@@ -28,7 +28,6 @@ public class UDPServer {
         processMessage(data);
       } catch (IOException e) {
         open = false;
-        System.exit(-1);
       }
     } while (open && totalSent != totalRecieved);
   }
@@ -39,6 +38,7 @@ public class UDPServer {
       msg = new MessageInfo(data); 
     } catch (Exception e) {
       System.out.println("Couldn't convert data to MessageInfo - Server");
+      System.exit(-1);
     }
     
     

@@ -76,10 +76,10 @@ public class UDPServer {
         if(i == (totalLost-1)) {
           System.out.println(lostMessages[i] + ".");  
         } else {
-          System.out.print(lostMessages[i] + ", ");
+          System.out.print(lostMessages[i] + ",\t");
         }
 
-        if (i%18 == 17) {
+        if (i%12 == 11) {
             System.out.println("");  
         }
       }

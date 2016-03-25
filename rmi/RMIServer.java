@@ -23,27 +23,34 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 	}
 
 	public void receiveMessage(MessageInfo msg) throws RemoteException {
+		// Function run Client-Side when message sent
 
+		// Setup on first message
 	    if (totalRecieved == -1){
 	      totalSent = msg.totalMessages;
 	      receivedMessages = new boolean[totalSent];
 	      totalRecieved = 0;
 	    }
 	    
+	    // Log each message in the array
 	    receivedMessages[msg.messageNum] = true;
 	    totalRecieved++;
 
-		if(totalRecieved == totalSent && totalRecieved != -1){
+	    // If this is the last expected packet, print out results
+		if(msg.messageNum = msg.totalMessages - 1){
 			finish();
 		}
 
 	}
 	public static void main(String[] args) {
+		
+		// Set up Security Policy
 		if (System.getSecurityManager() == null) {
 	            System.setSecurityManager(new SecurityManager());
 	    }
 
 		try {
+			// Create server and bind to registry
 			RMIServerI server = new RMIServer();
 	        rebindServer("RMIServerI", server);
 	        System.out.println("Server ready...");
@@ -55,7 +62,8 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 	}
 
 	protected static void rebindServer(String name, RMIServerI server) {
-		
+		// Function for binding Server and Registry
+
         try {
         	Registry registry = LocateRegistry.createRegistry(2000);
 			registry.rebind(name, server);
@@ -67,18 +75,25 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 	}
 		
 	public void finish() {
+		// Function to print stats at end of transmission
 
 		int totalLost = 0;
 		int [] lostMessages = new int[totalSent];
+
+		// Get indexes for lost messages into an array
 		for(int i = 0; i < totalSent; i++) {
 		  if(!receivedMessages[i]) {
 		    lostMessages[totalLost] = i;
 		    totalLost++;
 		  }
 		}
+
+		// Print summary stats
 		System.out.println("Messages sent: " + totalSent);
 		System.out.println("Messages recieved: " + totalRecieved);
 		System.out.println("Messages lost: " + (totalSent-totalRecieved));
+
+		// Pretty print Lost message numbers
 		if (totalLost != 0) {
 		  System.out.println("Lost Messages are: ");
 		  for(int i = 0; i < totalLost; i++) {

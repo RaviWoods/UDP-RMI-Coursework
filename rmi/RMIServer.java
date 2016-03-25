@@ -19,7 +19,7 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
   	private int totalSent = -1;
   	private boolean[] receivedMessages;
   	private int totalRecieved = -1;
-
+  	private boolean end = false;
 	public RMIServer() throws RemoteException {
 		super();
 	}
@@ -42,8 +42,7 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 	}
 
 	public void exitConnection() throws RemoteException {
-		System.out.println("Exit Success");
-		System.exit(0);
+		end = true;
 	}
 	public static void main(String[] args) {
 		if (System.getSecurityManager() == null) {
@@ -54,6 +53,12 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 			RMIServerI server = new RMIServer();
 	        rebindServer("RMIServerI", server);
 	        System.out.println("Server ready...");
+	        do {
+	        	if(end) {
+	        		System.out.println("Exit Success");
+					System.exit(0);
+	        	}
+	        } while(!end);
 	    } catch (Exception e) {
 	        System.err.println("RMIServerI exception:");
 	        e.printStackTrace();

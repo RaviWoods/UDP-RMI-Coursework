@@ -7,5 +7,4 @@ import common.*;
 
 public interface RMIServerI extends Remote {
 	public void receiveMessage(MessageInfo msg) throws RemoteException;
-	public void exitConnection(boolean success) throws RemoteException ;
 }

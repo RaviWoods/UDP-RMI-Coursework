@@ -31,25 +31,13 @@ public class RMIClient {
 	    try {
 			Registry registry = LocateRegistry.getRegistry(args[0],2000);
 			RMIServerI server = (RMIServerI) registry.lookup("RMIServerI");
-			long startTime = System.currentTimeMillis();
 			
 			boolean timeout = false;
 			for (int i = 0; i < countTo; i++){
             	MessageInfo message = new MessageInfo(countTo, i);
             	server.receiveMessage(message);
-            	if((System.currentTimeMillis() - startTime) > 60000){
-            		timeout = true;
-					break;	
-				}
 			}
-			if(timeout) {
-            	System.out.println("Timeout");	
-            	server.exitConnection(true);			
-			} else {
-            	System.out.println(countTo + " Messages Sent");
-            	server.exitConnection(false);				
-			}
-            
+            System.out.println(countTo + " Messages Sent");
             System.exit(0);
         } catch (Exception e) {
             System.err.println("Exception - Client");

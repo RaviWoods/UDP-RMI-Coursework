@@ -18,7 +18,6 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
   	private int totalSent = -1;
   	private boolean[] receivedMessages;
   	private int totalRecieved = -1;
-  	public static int end = 0;
 	public RMIServer() throws RemoteException {
 		super();
 	}
@@ -39,13 +38,6 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 		}
 
 	}
-
-	public void exitConnection(boolean timeout) throws RemoteException {
-			//end = 1;
-			if(timeout) {
-				finish();
-			}
-	}
 	public static void main(String[] args) {
 		if (System.getSecurityManager() == null) {
 	            System.setSecurityManager(new SecurityManager());
@@ -55,12 +47,6 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 			RMIServerI server = new RMIServer();
 	        rebindServer("RMIServerI", server);
 	        System.out.println("Server ready...");
-	        do {
-	        	if(end == 1) {
-	        		System.out.println("Exit");
-					System.exit(0);
-	        	} 
-	        } while(end == 0);
 	    } catch (Exception e) {
 	        System.err.println("RMIServerI exception:");
 	        e.printStackTrace();
@@ -93,7 +79,6 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 		System.out.println("Messages sent: " + totalSent);
 		System.out.println("Messages recieved: " + totalRecieved);
 		System.out.println("Messages lost: " + (totalSent-totalRecieved));
-		/*
 		if (totalLost != 0) {
 		  System.out.println("Lost Messages are: ");
 		  for(int i = 0; i < totalLost; i++) {
@@ -108,7 +93,6 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 		    }
 		  }
 		}
-		*/
 	}
 		
 }

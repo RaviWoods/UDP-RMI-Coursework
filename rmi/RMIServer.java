@@ -19,7 +19,7 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
   	private int totalSent = -1;
   	private boolean[] receivedMessages;
   	private int totalRecieved = -1;
-  	public int end = 0;
+  	public static int end = 0;
 	public RMIServer() throws RemoteException {
 		super();
 	}

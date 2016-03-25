@@ -10,7 +10,6 @@ import java.rmi.registry.Registry;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Arrays;
-import java.lang.Boolean;
 
 import common.*;
 
@@ -41,8 +40,11 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 
 	}
 
-	public void exitConnection(boolean success) throws RemoteException {
+	public void exitConnection(boolean timeout) throws RemoteException {
 			end = 1;
+			if(timeout) {
+				finish();
+			}
 	}
 	public static void main(String[] args) {
 		if (System.getSecurityManager() == null) {
@@ -55,13 +57,9 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 	        System.out.println("Server ready...");
 	        do {
 	        	if(end == 1) {
-	        		System.out.println("Exit Success");
+	        		System.out.println("Exit");
 					System.exit(0);
 	        	} 
-	        	//else if (end == 2) {
-	        	//	System.out.println("Exit Failure");
-				//	System.exit(-1);
-	        	//}
 	        } while(end == 0);
 	    } catch (Exception e) {
 	        System.err.println("RMIServerI exception:");

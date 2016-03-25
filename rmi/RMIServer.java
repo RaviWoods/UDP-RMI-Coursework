@@ -41,7 +41,7 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 	}
 
 	public void exitConnection(boolean timeout) throws RemoteException {
-			end = 1;
+			//end = 1;
 			if(timeout) {
 				finish();
 			}

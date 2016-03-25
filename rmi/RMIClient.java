@@ -36,8 +36,9 @@ public class RMIClient {
             	server.receiveMessage(message);
             }
             System.out.println(countTo + " Messages Sent");
+            System.exit(0);
         } catch (Exception e) {
-            System.err.println("Exception - Server");
+            System.err.println("Exception - Client");
             e.printStackTrace();
             System.exit(-1);
         }

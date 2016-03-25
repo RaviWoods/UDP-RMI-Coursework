@@ -37,7 +37,6 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 
 		if(totalRecieved == totalSent && totalRecieved != -1){
 			finish();
-			System.exit(0);
 		}
 
 	}

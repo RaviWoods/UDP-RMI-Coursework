@@ -34,7 +34,7 @@ public class UDPServer {
   }
 
   public void processMessage(String data) {
-    MessageInfo msg;
+    MessageInfo msg = null;
     try {
       msg = new MessageInfo(data); 
     } catch (Exception e) {

@@ -1,75 +1,54 @@
-/*
- * Created on 07-Sep-2004
- * @author bandara
- */
+
 package rmi;
 
 import java.net.MalformedURLException;
-import java.rmi.AccessException;
-import java.rmi.Naming;
-import java.rmi.RMISecurityManager;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
+import java.rmi.*;
 import java.util.Arrays;
+import java.lang.Boolean;
 
 import common.*;
 
-/**
- * @author bandara
- *
- */
 public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 
-	private int totalMessages = -1;
-	private int[] receivedMessages;
-	private int[] lostMessages;
-	private int totalLostMessages =0;
-	private int totalSent = -1;
+  	private int totalSent = -1;
+  	private boolean[] receivedMessages;
+  	private int totalRecieved = -1;
+
 	public RMIServer() throws RemoteException {
 		super();
 	}
 
 	public void receiveMessage(MessageInfo msg) throws RemoteException {
 
-		// TO-DO: On receipt of first message, initialise the receive buffer
-		if (totalMessages == -1 ){
-			totalSent = msg.totalMessages;
-			receivedMessages = new int[totalSent];
-			totalMessages = 0;
-			lostMessages = new int[totalSent];
-			
-		}
-		
-		// TO-DO: Log receipt of the message
-		receivedMessages[msg.messageNum] = 1;
-		totalMessages += 1;
+	    if (totalRecieved == -1){
+	      totalSent = msg.totalMessages;
+	      receivedMessages = new boolean[totalSent];
+	      totalRecieved = 0;
+	    }
+	    
+	    receivedMessages[msg.messageNum] = true;
+	    totalRecieved++;
 
-		// TO-DO: If this is the last expected message, then identify
-		//        any missing messages
-		if(msg.messageNum + 1  == msg.totalMessages){
-			summary();
+		if(totalRecieved == totalSent && totalRecieved != -1){
+			finish();
 		}
 
 	}
 
 
 	public static void main(String[] args) {
-		//RMIServer rmis = null;
-		 
 		if (System.getSecurityManager() == null) {
 	            System.setSecurityManager(new SecurityManager());
-	        }
-		try{
-			String name = "RMIServerI";
+	    }
+
+		try {
 			RMIServerI server = new RMIServer();
-	        
-	        rebindServer(name, server);
-	        System.out.println("RMIServerI bound");
-	    }catch (Exception e) {
+	        rebindServer("RMIServerI", server);
+	        System.out.println("Server ready...");
+	    } catch (Exception e) {
 	        System.err.println("RMIServerI exception:");
 	        e.printStackTrace();
+	        System.exit(-1);
 	    }
 	}
 
@@ -79,28 +58,38 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
         	Registry registry = LocateRegistry.createRegistry(2000);
 			registry.rebind(name, server);
 		} catch (RemoteException e) {
-			System.out.println("Problem creating/binding to registry at port 2000");
+			System.out.println("Couldn't bind registry - Server");
 			e.printStackTrace();
+			System.exit(-1);
 		}	
 	}
 		
-	public void summary(){
-		int i = 0;
+	public void finish() {
 		
-		while( i < totalSent){
-			if (receivedMessages[i] != 1 ){
-					lostMessages[totalLostMessages] = i;
-					totalLostMessages++;
-			}
-			i++;
+		int totalLost = 0;
+		int [] lostMessages = new int[totalSent];
+		for(int i = 0; i < totalSent; i++) {
+		  if(!receivedMessages[i]) {
+		    lostMessages[totalLost] = i;
+		    totalLost++;
+		  }
 		}
-		
-		lostMessages = Arrays.copyOf(lostMessages, totalLostMessages);
-		
 		System.out.println("Messages sent: " + totalSent);
-		System.out.println("Messages received: " + totalMessages);
-		if(totalLostMessages > 0){
-		System.out.println("Missing Messages are: " + Arrays.toString(lostMessages));
+		System.out.println("Messages recieved: " + totalRecieved);
+		System.out.println("Messages lost: " + (totalSent-totalRecieved));
+		if (totalLost != 0) {
+		  System.out.println("Lost Messages are: ");
+		  for(int i = 0; i < totalLost; i++) {
+		    if(i == (totalLost-1)) {
+		      System.out.println(lostMessages[i] + ".");  
+		    } else {
+		      System.out.print(lostMessages[i] + ",\t");
+		    }
+
+		    if (i%12 == 11) {
+		        System.out.println("");  
+		    }
+		  }
 		}
 	}
 		

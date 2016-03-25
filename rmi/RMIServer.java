@@ -93,6 +93,7 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 		System.out.println("Messages sent: " + totalSent);
 		System.out.println("Messages recieved: " + totalRecieved);
 		System.out.println("Messages lost: " + (totalSent-totalRecieved));
+		/*
 		if (totalLost != 0) {
 		  System.out.println("Lost Messages are: ");
 		  for(int i = 0; i < totalLost; i++) {
@@ -107,6 +108,7 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 		    }
 		  }
 		}
+		*/
 	}
 		
 }

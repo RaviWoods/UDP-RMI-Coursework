@@ -41,7 +41,7 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 
 	}
 
-	public void exitConnection() {
+	public void exitConnection() throws RemoteException {
 		System.out.println("Exit Success");
 		System.exit(0);
 	}

@@ -11,6 +11,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Arrays;
 import java.lang.Boolean;
+import java.lang.Enum;
 
 import common.*;
 
@@ -19,7 +20,7 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
   	private int totalSent = -1;
   	private boolean[] receivedMessages;
   	private int totalRecieved = -1;
-  	private static boolean end = false;
+  	public enum end{RUNNING,FAILURE,SUCCESS} = RUNNING;
 	public RMIServer() throws RemoteException {
 		super();
 	}
@@ -41,8 +42,12 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 
 	}
 
-	public void exitConnection() throws RemoteException {
-		end = true;
+	public void exitConnection(boolean success) throws RemoteException {
+		if(success) {
+			end = SUCCESS;
+		} else {
+			end = FAILURE;
+		}
 	}
 	public static void main(String[] args) {
 		if (System.getSecurityManager() == null) {
@@ -54,11 +59,14 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 	        rebindServer("RMIServerI", server);
 	        System.out.println("Server ready...");
 	        do {
-	        	if(end) {
+	        	if(end == SUCCESS) {
 	        		System.out.println("Exit Success");
 					System.exit(0);
+	        	} else if (end == FAILURE) {
+	        		System.out.println("Exit Failure");
+					System.exit(-1);
 	        	}
-	        } while(!end);
+	        } while(end == RUNNING);
 	    } catch (Exception e) {
 	        System.err.println("RMIServerI exception:");
 	        e.printStackTrace();

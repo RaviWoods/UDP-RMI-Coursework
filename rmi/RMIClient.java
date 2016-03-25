@@ -29,7 +29,7 @@ public class RMIClient {
 	    }
 	        
 	    try {
-			String name = LocateRegistry.getRegistry(args[0],0);
+			Registry registry = LocateRegistry.getRegistry(args[0],2000);
 			RMIServerI server = (RMIServerI) registry.lookup("RMIServerI");
             for (int i = 0; i < countTo; i++){
             	MessageInfo message = new MessageInfo(countTo, i);

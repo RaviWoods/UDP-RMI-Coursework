@@ -41,7 +41,10 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 
 	}
 
-
+	public void exitConnection() {
+		System.out.println("Exit Success");
+		System.exit(0);
+	}
 	public static void main(String[] args) {
 		if (System.getSecurityManager() == null) {
 	            System.setSecurityManager(new SecurityManager());

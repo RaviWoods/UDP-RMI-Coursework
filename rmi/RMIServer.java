@@ -58,6 +58,7 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 	        rebindServer("RMIServerI", server);
 	        System.out.println("Server ready...");
 	        do {
+	        	System.err.println("LOOP");
 	        	if(end == 1) {
 	        		System.out.println("Exit Success");
 					System.exit(0);

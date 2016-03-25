@@ -79,7 +79,7 @@ public class UDPServer {
           System.out.print(lostMessages[i] + ", ");
         }
 
-        if (i%10 == 9) {
+        if (i%18 == 17) {
         }
             System.out.println("");  
         }

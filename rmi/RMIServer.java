@@ -42,11 +42,7 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 	}
 
 	public void exitConnection(boolean success) throws RemoteException {
-		if(success) {
 			end = 1;
-		} else {
-			end = 2;
-		}
 	}
 	public static void main(String[] args) {
 		if (System.getSecurityManager() == null) {
@@ -61,10 +57,11 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 	        	if(end == 1) {
 	        		System.out.println("Exit Success");
 					System.exit(0);
-	        	} else if (end == 2) {
-	        		System.out.println("Exit Failure");
-					System.exit(-1);
-	        	}
+	        	} 
+	        	//else if (end == 2) {
+	        	//	System.out.println("Exit Failure");
+				//	System.exit(-1);
+	        	//}
 	        } while(end == 0);
 	    } catch (Exception e) {
 	        System.err.println("RMIServerI exception:");

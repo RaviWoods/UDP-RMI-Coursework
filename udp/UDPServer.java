@@ -28,9 +28,9 @@ public class UDPServer {
         processMessage(data);
       } catch (IOException e) {
         open = false;
+        System.exit(-1);
       }
     } while (open && totalSent != totalRecieved);
-
   }
 
   public void processMessage(String data) {
@@ -39,7 +39,7 @@ public class UDPServer {
       msg = new MessageInfo(data); 
     } catch (Exception e) {
       System.out.println("Couldn't convert data to MessageInfo - Server");
-      return;
+      System.exit(-1);
     }
     
     
@@ -84,8 +84,6 @@ public class UDPServer {
         }
       }
     }
-
-    
   }
 
 
@@ -95,6 +93,7 @@ public class UDPServer {
     } catch (SocketException e) {
       System.out.println("Couldn't initialise socket - Server");
       e.printStackTrace();
+      System.exit(-1);
     }
     System.out.println("Server ready...");
   }
@@ -102,7 +101,7 @@ public class UDPServer {
   public static void main(String args[]) {
     int recvPort;
     if (args.length < 1) {
-      System.err.println("Arguments required: recv port - Server");
+      System.err.println("Arguments required: recv port");
       System.exit(-1);
     }
     recvPort = Integer.parseInt(args[0]);

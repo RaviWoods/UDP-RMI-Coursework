@@ -7,13 +7,11 @@ package rmi;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
+import java.rmi.RMISecurityManager;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
-import java.rmi.RMISecurityManager; // deprecated? use SecurityManger instead?
 
 import common.MessageInfo;
 
@@ -33,42 +31,35 @@ public class RMIClient {
 			System.exit(-1);
 		}
 
+		String urlServer = new String("rmi://" + args[0] + "/RMIServer");
 		int numMessages = Integer.parseInt(args[1]);
 
 		// TO-DO: Initialise Security Manager
-	
-		if (System.getSecurityManager()==null)
-			System.setSecurityManager(new RMISecurityManager());
+
 		// TO-DO: Bind to RMIServer
-		try {
-			String serverURL = null;
-			Registry registry = null;
-			serverURL = new String("rmi://" + args[0] + "/RMIServer");
-			registry = LocateRegistry.getRegistry(args[0],1099);
-			iRMIServer = (RMIServerI) Naming.lookup(serverURL);
-			for (int i=0; i<numMessages; i++) {
-					MessageInfo msg = null;
-					msg = new MessageInfo(numMessages, i);
-					if(iRMIServer == null) {
-						System.out.println("NULL");
-					}
-					try {
-						iRMIServer.receiveMessage(msg);
-					}
-					catch (Exception e) {
-						System.out.println("2nd");
-						System.out.println("i = " + i);
-						System.out.println(e);
-					}
-					
-				}
-		}
-		catch (Exception e) {
-			System.out.println(e);
-		}
-		
 
-
-
-	}
+		// TO-DO: Attempt to send messages the specified number of times
+	
+	
+	        if (System.getSecurityManager() == null) {
+	            System.setSecurityManager(new SecurityManager());
+	        }
+	        
+	        try {
+	            String name = "RMIServerI";
+	            Registry registry = LocateRegistry.getRegistry(args[0],2000);
+	            RMIServerI server = (RMIServerI) registry.lookup(name);
+	            for (int i = 0; i < numMessages; i++){
+	            	MessageInfo msg = new MessageInfo(numMessages, i);
+	            	server.receiveMessage(msg);
+	            }
+	            System.out.println("All Messages Sent");
+	        } catch (Exception e) {
+	            System.err.println("server exception:");
+	            e.printStackTrace();
+	        }
+	    }    
+	
+	
+	
 }

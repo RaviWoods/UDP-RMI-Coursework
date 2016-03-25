@@ -15,20 +15,24 @@ public class UDPClient {
 
       // Get the parameters
       if (args.length < 3) {
-         System.err.println("Arguments required: server name/IP, recv port, message count  - Client");
+         System.err.print("Args: ");
+         System.err.println("server name/IP, recv port, msg count");
          System.exit(-1);
       }
 
       try {
          serverAddr = InetAddress.getByName(args[0]);
       } catch (UnknownHostException e) {
-         System.out.println("Bad server address in UDPClient, " + args[0] + " caused an unknown host exception " + e + " - Client");
+         System.out.print("Bad server address in UDPClient, " + args[0]);
+         System.out.print(" caused an unknown host exception " + e);
+         System.out.println(" - Client");
          System.exit(-1);
       }
       recvPort = Integer.parseInt(args[1]);
       countTo = Integer.parseInt(args[2]);
       UDPClient client = new UDPClient();
       client.testLoop(serverAddr, recvPort, countTo);
+      return;
    }
 
    public UDPClient() {
@@ -37,6 +41,7 @@ public class UDPClient {
       } catch (SocketException e) {
          System.out.println("Couldn't initialise socket - Client");
          e.printStackTrace();
+         System.exit(-1);
       }
    }
 
@@ -52,13 +57,15 @@ public class UDPClient {
 
       byte[] pktData = payload.getBytes();
       int payloadSize = pktData.length;
-      DatagramPacket pkt = new DatagramPacket(pktData, payloadSize, destAddr, destPort);
+      DatagramPacket pkt;
+      pkt = new DatagramPacket(pktData, payloadSize, destAddr, destPort);
 
       try {
           sendSoc.send(pkt) ;
       } catch (IOException e) {
          System.out.println("Couldn't send packet - Client");
          e.printStackTrace();
+         System.exit(-1);
       }
    }
 }
